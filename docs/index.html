@@ -15,7 +15,7 @@
     <button id="nextMonth">›</button>
   </div>
 
-  <!-- Calendar Grid -->
+  <!-- Calendar -->
   <div class="calendar" id="calendar"></div>
 
   <script>
@@ -27,7 +27,7 @@
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // June 2025
+    let current = new Date(2025, 5); // June = 5
 
     function renderCalendar(date) {
       const year = date.getFullYear();
@@ -44,16 +44,17 @@
       let weekday = firstDay.getDay();
       let filledCells = 0;
 
-      // Start blanks
       for (let i = 0; i < weekday; i++) {
         html += '<td></td>';
         filledCells++;
       }
 
-      // Calendar days
       for (let day = 1; day <= totalDays; day++) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+        const isToday =
+          day === today.getDate() &&
+          month === today.getMonth() &&
+          year === today.getFullYear();
         const event = events[dateStr];
         const cellClass = isToday ? 'today' : '';
         const eventHTML = event ? `<div class="event">${event}</div>` : '';
@@ -66,7 +67,6 @@
         }
       }
 
-      // Trailing blanks to ensure 6 full weeks (6 rows × 7 = 42)
       while (filledCells < 42) {
         html += '<td></td>';
         filledCells++;
@@ -90,6 +90,7 @@
       renderCalendar(current);
     };
 
+    // VERY IMPORTANT — this line renders it on load!
     renderCalendar(current);
   </script>
 </body>
