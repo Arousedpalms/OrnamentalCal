@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vintage Calendar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ribbon">June 2025</div>
+  
+  <div class="calendar" id="calendar"></div>
+
+  <script>
+    function generateCalendar(year, month) {
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const today = new Date();
+      const firstDay = new Date(year, month, 1);
+      const totalDays = new Date(year, month + 1, 0).getDate();
+      const calendar = document.getElementById('calendar');
+
+      let html = '<table><tr>';
+      daysOfWeek.forEach(day => html += `<th>${day}</th>`);
+      html += '</tr><tr>';
+
+      // Empty cells for offset
+      for (let i = 0; i < firstDay.getDay(); i++) {
+        html += '<td></td>';
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const currentDate = new Date(year, month, day);
+        const isToday =
+          currentDate.getDate() === today.getDate() &&
+          currentDate.getMonth() === today.getMonth() &&
+          currentDate.getFullYear() === today.getFullYear();
+
+        html += `<td class="${isToday ? 'today' : ''}">${day}</td>`;
+
+        if ((firstDay.getDay() + day) % 7 === 0) html += '</tr><tr>';
+      }
+
+      html += '</tr></table>';
+      calendar.innerHTML = html;
+    }
+
+    generateCalendar(2025, 5); // June = 5 (0-indexed)
+  </script>
+</body>
+</html>
 
