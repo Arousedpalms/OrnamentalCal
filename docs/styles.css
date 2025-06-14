@@ -10,7 +10,7 @@ body {
   align-items: center;
 }
 
-/* Ribbon / Navigation Header */
+/* Header Ribbon */
 .ribbon {
   display: flex;
   align-items: center;
@@ -54,7 +54,7 @@ body {
   border-radius: 12px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
   width: 400px;
-  height: 440px;
+  height: 500px; /* Locks the height for all months */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -75,7 +75,6 @@ th, td {
   font-size: 16px;
   vertical-align: top;
   padding: 4px;
-  height: 100%;
 }
 
 th {
@@ -84,7 +83,7 @@ th {
   font-weight: 600;
 }
 
-/* Today's Date Highlight */
+/* Today's Date Styling */
 .today {
   background-color: #d6b48f;
   color: white;
@@ -92,7 +91,7 @@ th {
   border-radius: 50%;
 }
 
-/* Event Styling */
+/* Event Labels */
 .event {
   font-size: 11px;
   margin-top: 4px;
