@@ -8,16 +8,18 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Header with Month Navigation -->
   <div class="ribbon">
     <button id="prevMonth">‹</button>
     <span id="monthTitle">June 2025</span>
     <button id="nextMonth">›</button>
   </div>
 
+  <!-- Calendar Container -->
   <div class="calendar" id="calendar"></div>
 
+  <!-- Script to Handle Calendar Rendering -->
   <script>
-    // 🌸 Custom events (highlighted under dates)
     const events = {
       "2025-06-01": "📌 Start",
       "2025-06-14": "🌕 Full Moon",
@@ -26,7 +28,7 @@
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // Start at June 2025
+    let current = new Date(2025, 5); // June 2025
 
     function renderCalendar(date) {
       const year = date.getFullYear();
@@ -36,9 +38,9 @@
       const totalDays = new Date(year, month + 1, 0).getDate();
       const today = new Date();
 
-      let html = '<table><tr>';
+      let html = '<table><thead><tr>';
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
-      html += '</tr><tr>';
+      html += '</tr></thead><tbody><tr>';
 
       for (let i = 0; i < firstDay.getDay(); i++) {
         html += '<td></td>';
@@ -60,18 +62,28 @@
         }
       }
 
-      html += '</tr></table>';
+      html += '</tr></tbody></table>';
       calendar.innerHTML = html;
 
       const monthName = date.toLocaleString('default', { month: 'long' });
       monthTitle.textContent = `${monthName} ${year}`;
     }
 
-    // Month switching
     document.getElementById('prevMonth').onclick = () => {
       current.setMonth(current.getMonth() - 1);
       renderCalendar(current);
     };
+
+    document.getElementById('nextMonth').onclick = () => {
+      current.setMonth(current.getMonth() + 1);
+      renderCalendar(current);
+    };
+
+    renderCalendar(current);
+  </script>
+</body>
+</html>
+
 
     document.getElementById('nextMonth').onclick = () => {
       current.setMonth(current.getMonth() + 1);
