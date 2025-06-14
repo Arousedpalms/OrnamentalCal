@@ -13,20 +13,20 @@
     <span id="monthTitle">June 2025</span>
     <button id="nextMonth">›</button>
   </div>
-  
+
   <div class="calendar" id="calendar"></div>
 
   <script>
-    // 🌟 Your custom events
+    // 🌸 Custom events (highlighted under dates)
     const events = {
+      "2025-06-01": "📌 Start",
       "2025-06-14": "🌕 Full Moon",
-      "2025-06-21": "🌸 Midsummer",
-      "2025-06-01": "📌 Start"
+      "2025-06-21": "🌸 Midsummer"
     };
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // Start on June 2025
+    let current = new Date(2025, 5); // Start at June 2025
 
     function renderCalendar(date) {
       const year = date.getFullYear();
@@ -51,8 +51,8 @@
           month === today.getMonth() &&
           year === today.getFullYear();
         const event = events[dateStr];
-        let cellClass = isToday ? 'today' : '';
-        let eventHTML = event ? `<div class="event">${event}</div>` : '';
+        const cellClass = isToday ? 'today' : '';
+        const eventHTML = event ? `<div class="event">${event}</div>` : '';
         html += `<td class="${cellClass}">${day}${eventHTML}</td>`;
 
         if ((firstDay.getDay() + day) % 7 === 0) {
@@ -67,7 +67,7 @@
       monthTitle.textContent = `${monthName} ${year}`;
     }
 
-    // Month navigation buttons
+    // Month switching
     document.getElementById('prevMonth').onclick = () => {
       current.setMonth(current.getMonth() - 1);
       renderCalendar(current);
@@ -78,7 +78,7 @@
       renderCalendar(current);
     };
 
-    // Initial load
+    // Initial render
     renderCalendar(current);
   </script>
 </body>
