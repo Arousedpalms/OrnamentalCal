@@ -1,4 +1,4 @@
-/* General Layout */
+/* General Page Layout */
 body {
   margin: 0;
   padding: 20px;
@@ -10,7 +10,7 @@ body {
   align-items: center;
 }
 
-/* Ribbon Header */
+/* Ribbon / Header */
 .ribbon {
   display: flex;
   align-items: center;
@@ -25,7 +25,6 @@ body {
   margin-bottom: 25px;
 }
 
-/* Month Text */
 .ribbon span {
   font-size: 24px;
   letter-spacing: 1px;
@@ -48,6 +47,7 @@ body {
 
 /* Calendar Container */
 .calendar {
+  position: relative;
   background: #fff8e8;
   border: 2px solid #6a574d;
   padding: 20px;
@@ -55,9 +55,35 @@ body {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
   max-width: 400px;
   width: 100%;
+  overflow: hidden;
 }
 
-/* Table Layout */
+/* Decorative Corners (Optional Ornament Image) */
+.calendar::before,
+.calendar::after {
+  content: "";
+  position: absolute;
+  background-image: url('ornament.png');
+  background-size: 60px;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 60px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.calendar::before {
+  top: -10px;
+  left: -10px;
+}
+
+.calendar::after {
+  bottom: -10px;
+  right: -10px;
+  transform: rotate(180deg);
+}
+
+/* Table Styling */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -72,14 +98,13 @@ th, td {
   vertical-align: top;
 }
 
-/* Header Row */
 th {
   background-color: #e9d8c3;
   color: #4c3b30;
   font-weight: 600;
 }
 
-/* Today Highlight */
+/* Today’s Date Highlight */
 .today {
   background-color: #d6b48f;
   color: white;
@@ -87,52 +112,10 @@ th {
   border-radius: 50%;
 }
 
-/* Event Label */
+/* Event Labels */
 .event {
   font-size: 12px;
   margin-top: 6px;
   color: #7a5f4d;
   opacity: 0.85;
 }
-
-/* Decorative Flourishes */
-.calendar {
-  position: relative;
-  background: #fff8e8;
-  border: 2px solid #6a574d;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
-  max-width: 400px;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Corner Flourish */
-.calendar::before,
-.calendar::after {
-  content: "";
-  position: absolute;
-  background-image: url('ornament.png');
-  background-size: 60px;
-  background-repeat: no-repeat;
-  width: 60px;
-  height: 60px;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-/* Top-left corner */
-.calendar::before {
-  top: -10px;
-  left: -10px;
-  transform: rotate(0deg);
-}
-
-/* Bottom-right corner */
-.calendar::after {
-  bottom: -10px;
-  right: -10px;
-  transform: rotate(180deg);
-}
-
