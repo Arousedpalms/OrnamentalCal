@@ -67,13 +67,19 @@
       monthTitle.textContent = `${monthName} ${year}`;
     }
 
+    // Month navigation buttons
     document.getElementById('prevMonth').onclick = () => {
       current.setMonth(current.getMonth() - 1);
       renderCalendar(current);
     };
 
     document.getElementById('nextMonth').onclick = () => {
-      current.setMonth(current.getMo
+      current.setMonth(current.getMonth() + 1);
+      renderCalendar(current);
+    };
 
-
-
+    // Initial load
+    renderCalendar(current);
+  </script>
+</body>
+</html>
