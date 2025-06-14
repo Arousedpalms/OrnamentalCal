@@ -94,3 +94,45 @@ th {
   color: #7a5f4d;
   opacity: 0.85;
 }
+
+/* Decorative Flourishes */
+.calendar {
+  position: relative;
+  background: #fff8e8;
+  border: 2px solid #6a574d;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.08);
+  max-width: 400px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Corner Flourish */
+.calendar::before,
+.calendar::after {
+  content: "";
+  position: absolute;
+  background-image: url('ornament.png');
+  background-size: 60px;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 60px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Top-left corner */
+.calendar::before {
+  top: -10px;
+  left: -10px;
+  transform: rotate(0deg);
+}
+
+/* Bottom-right corner */
+.calendar::after {
+  bottom: -10px;
+  right: -10px;
+  transform: rotate(180deg);
+}
+
