@@ -18,7 +18,6 @@
   <!-- Calendar Container -->
   <div class="calendar" id="calendar"></div>
 
-  <!-- Script to Handle Calendar Rendering -->
   <script>
     const events = {
       "2025-06-01": "📌 Start",
@@ -42,56 +41,14 @@
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
       html += '</tr></thead><tbody><tr>';
 
-      for (let i = 0; i < firstDay.getDay(); i++) {
+      let day = 1;
+      let currentWeekday = firstDay.getDay();
+
+      // Fill initial empty cells
+      for (let i = 0; i < currentWeekday; i++) {
         html += '<td></td>';
       }
 
-      for (let day = 1; day <= totalDays; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isToday =
-          day === today.getDate() &&
-          month === today.getMonth() &&
-          year === today.getFullYear();
-        const event = events[dateStr];
-        const cellClass = isToday ? 'today' : '';
-        const eventHTML = event ? `<div class="event">${event}</div>` : '';
-        html += `<td class="${cellClass}">${day}${eventHTML}</td>`;
+      // Fill the days
+      while (
 
-        if ((firstDay.getDay() + day) % 7 === 0) {
-          html += '</tr><tr>';
-        }
-      }
-
-      html += '</tr></tbody></table>';
-      calendar.innerHTML = html;
-
-      const monthName = date.toLocaleString('default', { month: 'long' });
-      monthTitle.textContent = `${monthName} ${year}`;
-    }
-
-    document.getElementById('prevMonth').onclick = () => {
-      current.setMonth(current.getMonth() - 1);
-      renderCalendar(current);
-    };
-
-    document.getElementById('nextMonth').onclick = () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current);
-    };
-
-    renderCalendar(current);
-  </script>
-</body>
-</html>
-
-
-    document.getElementById('nextMonth').onclick = () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current);
-    };
-
-    // Initial render
-    renderCalendar(current);
-  </script>
-</body>
-</html>
