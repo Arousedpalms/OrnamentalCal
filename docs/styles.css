@@ -14,13 +14,6 @@
 
 /* Event Highlight */
 .event {
-
-const events = {
-  "2025-06-14": "🌕 Full Moon",
-  "2025-06-21": "🌸 Midsummer",
-  "2025-06-01": "📌 Start"
-};
-
   font-size: 12px;
   margin-top: 5px;
   color: #7a5f4d;
