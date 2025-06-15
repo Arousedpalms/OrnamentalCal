@@ -13,25 +13,22 @@
     <!-- Top Banner -->
     <div class="top-banner">
       <img src="ornate-calendar-banner.png" alt="Banner" class="banner-img">
-      <div class="banner-text" id="monthTitle">June 2025</div>
+      <div class="banner-text">
+        <button id="prevMonth" class="nav-btn">‹</button>
+        <span id="monthTitle">June 2025</span>
+        <button id="nextMonth" class="nav-btn">›</button>
+      </div>
     </div>
 
     <!-- Side Florals -->
     <img src="left floral.png" alt="Left Floral" class="side-floral left">
     <img src="right floral.png" alt="Right Floral" class="side-floral right">
 
-    <!-- Navigation -->
-    <div class="navigation">
-      <button id="prevMonth">‹ Prev</button>
-      <button id="nextMonth">Next ›</button>
-    </div>
-
     <!-- Calendar -->
     <div class="calendar" id="calendar"></div>
 
   </div>
 
-  <!-- Calendar Script -->
   <script>
     const events = {
       "2025-06-01": "📌 Start",
@@ -54,5 +51,40 @@
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
       html += '</tr><tr>';
 
-      for (let i = 0; i < firstDay; i++) {
-        html += '<td></td
+      for (let i = 0; i < firstDay; i++) html += '<td></td>';
+
+      const today = new Date();
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isToday = today.getFullYear() === year &&
+                        today.getMonth() === month &&
+                        today.getDate() === day;
+        const event = events[fullDate];
+        const cellClass = isToday ? 'today' : '';
+        const eventMarkup = event ? `<div class="event">${event}</div>` : '';
+        html += `<td class="${cellClass}">${day}${eventMarkup}</td>`;
+        if ((firstDay + day) % 7 === 0 && day !== daysInMonth) html += '</tr><tr>';
+      }
+
+      html += '</tr></table>';
+      calendar.innerHTML = html;
+
+      const monthName = date.toLocaleString('default', { month: 'long' });
+      monthTitle.textContent = `${monthName} ${year}`;
+    }
+
+    document.getElementById('prevMonth').onclick = () => {
+      current.setMonth(current.getMonth() - 1);
+      renderCalendar(current);
+    };
+
+    document.getElementById('nextMonth').onclick = () => {
+      current.setMonth(current.getMonth() + 1);
+      renderCalendar(current);
+    };
+
+    renderCalendar(current);
+  </script>
+</body>
+</html>
