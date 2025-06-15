@@ -5,68 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ornamental Calendar</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="calendar-wrapper">
 
-    <!-- Top Banner with Label -->
+  <div class="calendar-wrapper">
+    <!-- Side Florals -->
+    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
+    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
+
+    <!-- Top Banner with Month Title -->
     <div class="top-banner">
-      <img src="ornate-calendar-banner.png" alt="Decorative Banner" />
-      <div class="month-label" id="monthTitle">June 2025</div>
+      <img src="ornate-calendar-banner.png" alt="Calendar Banner" class="banner-img" />
+      <div class="banner-text" id="monthTitle">June 2025</div>
     </div>
 
     <!-- Navigation Buttons -->
-    <div class="nav-buttons">
+    <div class="navigation">
       <button id="prevMonth">‹</button>
       <button id="nextMonth">›</button>
     </div>
 
-    <!-- Calendar Grid -->
-    <div class="calendar" id="calendar"></div>
-
-    <!-- Decorative Florals -->
-    <img class="side-floral left" src="left floral.png" alt="Left Floral" />
-    <img class="side-floral right" src="right floral.png" alt="Right Floral" />
-    <img class="bottom-floral" src="bottom floral.png" alt="Bottom Floral" />
+    <!-- Calendar -->
+    <div id="calendar" class="calendar"></div>
   </div>
 
   <script>
     const events = {
-      "2025-06-01": "📌 Start",
       "2025-06-14": "🌕 Full Moon",
-      "2025-06-21": "🌸 Midsummer"
+      "2025-06-21": "🌸 Midsummer",
+      "2025-06-01": "📌 Start"
     };
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // June 2025
+    let current = new Date(2025, 5); // June 2025 (Month is 0-indexed)
 
     function renderCalendar(date) {
       const year = date.getFullYear();
       const month = date.getMonth();
-      const firstDay = new Date(year, month, 1);
-      const totalDays = new Date(year, month + 1, 0).getDate();
-      const today = new Date();
-
       const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+
       let html = '<table><tr>';
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
       html += '</tr><tr>';
 
-      for (let i = 0; i < firstDay.getDay(); i++) {
+      for (let i = 0; i < firstDay; i++) {
         html += '<td></td>';
       }
 
       for (let day = 1; day <= totalDays; day++) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isToday = day === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-        const event = events[dateStr] || '';
-        let cellClass = isToday ? 'today' : '';
+        const event = events[dateStr];
+        let cellClass = '';
         let eventHTML = event ? `<div class="event">${event}</div>` : '';
         html += `<td class="${cellClass}">${day}${eventHTML}</td>`;
 
-        if ((firstDay.getDay() + day) % 7 === 0) {
+        if ((firstDay + day) % 7 === 0) {
           html += '</tr><tr>';
         }
       }
