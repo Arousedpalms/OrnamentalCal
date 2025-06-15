@@ -1,45 +1,91 @@
-/* Reset and Base */
-body {
-  margin: 0;
-  padding: 30px;
-  background-color: #f8f2e5;
-  font-family: 'Playfair Display', serif;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ornamental Calendar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-/* Calendar Wrapper */
-.calendar-wrapper {
-  position: relative;
-  width: 460px;
-  background-color: #fffaf0;
-  border: 2px solid #5a4435;
-  border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-  padding: 160px 20px 80px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
+  <div class="calendar-wrapper">
+    <!-- Side Florals -->
+    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
+    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
 
-/* Top Banner */
-.top-banner {
-  position: absolute;
-  top: -70px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 160px;
-  pointer-events: none;
-  z-index: 1;
-}
+    <!-- Top Banner with Month Title -->
+    <div class="top-banner">
+      <img src="ornate-calendar-banner.png" alt="Calendar Banner" class="banner-img" />
+      <div class="banner-text" id="monthTitle">June 2025</div>
+    </div>
 
-.top-banner img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+    <!-- Navigation Buttons -->
+    <div class="navigation">
+      <button id="prevMonth">‹</button>
+      <button id="nextMonth">›</button>
+    </div>
 
-.month-label {
-  position: absolute;
-  top: 68%;
+    <!-- Calendar -->
+    <div id="calendar" class="calendar"></div>
+  </div>
+
+  <script>
+    const events = {
+      "2025-06-14": "🌕 Full Moon",
+      "2025-06-21": "🌸 Midsummer",
+      "2025-06-01": "📌 Start"
+    };
+
+    const calendar = document.getElementById('calendar');
+    const monthTitle = document.getElementById('monthTitle');
+    let current = new Date(2025, 5); // June 2025 (Month is 0-indexed)
+
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const firstDay = new Date(year, month, 1).getDay();
+      const totalDays = new Date(year, month + 1, 0).getDate();
+
+      let html = '<table><tr>';
+      daysOfWeek.forEach(day => html += `<th>${day}</th>`);
+      html += '</tr><tr>';
+
+      for (let i = 0; i < firstDay; i++) {
+        html += '<td></td>';
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const event = events[dateStr];
+        let cellClass = '';
+        let eventHTML = event ? `<div class="event">${event}</div>` : '';
+        html += `<td class="${cellClass}">${day}${eventHTML}</td>`;
+
+        if ((firstDay + day) % 7 === 0) {
+          html += '</tr><tr>';
+        }
+      }
+
+      html += '</tr></table>';
+      calendar.innerHTML = html;
+
+      const monthName = date.toLocaleString('default', { month: 'long' });
+      monthTitle.textContent = `${monthName} ${year}`;
+    }
+
+    document.getElementById('prevMonth').onclick = () => {
+      current.setMonth(current.getMonth() - 1);
+      renderCalendar(current);
+    };
+
+    document.getElementById('nextMonth').onclick = () => {
+      current.setMonth(current.getMonth() + 1);
+      renderCalendar(current);
+    };
+
+    renderCalendar(current);
+  </script>
+</body>
+</html>
