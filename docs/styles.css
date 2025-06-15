@@ -19,8 +19,8 @@ body {
 .top-banner {
   position: relative;
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: -60px; /* pull banner closer to calendar grid */
+  margin-top: 20px;
+  margin-bottom: -90px; /* snug to calendar */
   z-index: 3;
 }
 
@@ -33,7 +33,7 @@ body {
 
 .banner-text {
   position: absolute;
-  top: 53%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -62,18 +62,19 @@ body {
 /* Side Florals */
 .side-floral {
   position: absolute;
-  top: 430px; /* vertical alignment with calendar grid */
-  width: 110px;
-  opacity: 0.88;
+  top: 440px;      /* aligns vertically with calendar */
+  width: 100px;
+  opacity: 0.92;
   z-index: 1;
+  pointer-events: none; /* allows clicks through florals */
 }
 
 .side-floral.left {
-  left: -100px;
+  left: -70px;     /* tight to calendar */
 }
 
 .side-floral.right {
-  right: -100px;
+  right: -70px;
 }
 
 /* Calendar Container */
@@ -87,6 +88,7 @@ body {
   z-index: 2;
 }
 
+/* Calendar Table */
 table {
   width: 100%;
   border-collapse: collapse;
