@@ -8,19 +8,20 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <div class="calendar-wrapper">
 
-    <!-- Ornamental Top Banner -->
+    <!-- Top Banner with Month Title -->
     <div class="top-banner">
-      <img src="ornate-calendar-banner.png" alt="Banner Frame">
-      <span id="monthTitle" class="month-label">June 2025</span>
+      <img src="ornate-calendar-banner.png" alt="Top Floral Banner">
+      <span class="month-label" id="monthTitle">June 2025</span>
     </div>
 
     <!-- Side Florals -->
     <img src="left floral.png" alt="Left Floral" class="side-floral left">
     <img src="right floral.png" alt="Right Floral" class="side-floral right">
 
-    <!-- Calendar Container -->
+    <!-- Calendar Table -->
     <div class="calendar" id="calendar"></div>
 
     <!-- Bottom Floral -->
@@ -38,7 +39,7 @@
       "2025-06-21": "🌸 Midsummer"
     };
 
-    let current = new Date(2025, 5); // June 2025 (month is 0-indexed)
+    let current = new Date(2025, 5); // June 2025 (Month is 0-indexed)
 
     function renderCalendar(date) {
       const year = date.getFullYear();
@@ -80,5 +81,6 @@
 
     renderCalendar(current);
   </script>
+
 </body>
 </html>
