@@ -12,7 +12,7 @@
 
     <!-- Top Banner -->
     <div class="top-banner">
-      <img src="ornate-calendar-banner.png" alt="Banner" class="banner-img">
+      <img src="ornate-calendar-banner.png" alt="Banner" class="banner-img" />
       <div class="banner-text">
         <button id="prevMonth" class="nav-btn">‹</button>
         <span id="monthTitle">June 2025</span>
@@ -21,10 +21,10 @@
     </div>
 
     <!-- Side Florals -->
-    <img src="left floral.png" alt="Left Floral" class="side-floral left">
-    <img src="right floral.png" alt="Right Floral" class="side-floral right">
+    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
+    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
 
-    <!-- Calendar -->
+    <!-- Calendar Grid -->
     <div class="calendar" id="calendar"></div>
 
   </div>
@@ -38,7 +38,7 @@
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // June 2025
+    let current = new Date(2025, 5); // Start in June 2025
 
     function renderCalendar(date) {
       const year = date.getFullYear();
@@ -47,9 +47,9 @@
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
       const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      let html = '<table><tr>';
+      let html = '<table><thead><tr>';
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
-      html += '</tr><tr>';
+      html += '</tr></thead><tbody><tr>';
 
       for (let i = 0; i < firstDay; i++) html += '<td></td>';
 
@@ -67,7 +67,7 @@
         if ((firstDay + day) % 7 === 0 && day !== daysInMonth) html += '</tr><tr>';
       }
 
-      html += '</tr></table>';
+      html += '</tr></tbody></table>';
       calendar.innerHTML = html;
 
       const monthName = date.toLocaleString('default', { month: 'long' });
