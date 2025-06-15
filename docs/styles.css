@@ -1,4 +1,4 @@
-/* Base Styles */
+/* Reset & Base */
 body {
   margin: 0;
   padding: 0;
@@ -11,35 +11,33 @@ body {
   min-height: 100vh;
 }
 
+/* Wrapper for all content */
 .calendar-wrapper {
   position: relative;
-  width: 600px;
-  padding-top: 180px;
+  width: 700px;
+  margin: 60px auto;
 }
 
 /* Top Banner */
 .top-banner {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   text-align: center;
+  margin-bottom: 40px;
 }
 
 .banner-img {
   width: 100%;
-  max-width: 600px;
   height: auto;
   display: block;
 }
 
 .banner-text {
   position: absolute;
-  top: 43%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #fff;
-  font-size: 24px;
+  color: white;
+  font-size: 28px;
   font-weight: bold;
   pointer-events: none;
 }
@@ -47,25 +45,25 @@ body {
 /* Side Florals */
 .side-floral {
   position: absolute;
-  top: 180px;
-  width: 120px;
+  top: 120px;
+  width: 140px;
   height: auto;
   z-index: -1;
 }
 
 .side-floral.left {
-  left: -70px;
+  left: -100px;
 }
 
 .side-floral.right {
-  right: -70px;
+  right: -100px;
   transform: scaleX(-1);
 }
 
 /* Navigation Buttons */
 .navigation {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .navigation button {
@@ -84,13 +82,15 @@ body {
   background: #926d54;
 }
 
-/* Calendar Styling */
+/* Calendar Styles */
 .calendar {
   background: #fffdf5;
   border: 2px solid #b08b6f;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 1;
 }
 
 table {
@@ -123,11 +123,10 @@ td {
   font-weight: bold;
 }
 
-/* Event Styles */
+/* Event Styling */
 .event {
   font-size: 12px;
   margin-top: 4px;
   color: #7b5e4b;
   line-height: 1.2;
 }
-
