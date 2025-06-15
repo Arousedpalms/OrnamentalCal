@@ -12,18 +12,20 @@ body {
 .calendar-wrapper {
   position: relative;
   max-width: 600px;
+  margin: 0 auto;
 }
 
 /* Top Banner */
 .top-banner {
   position: relative;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: -20px; /* brings it closer to weekdays */
+  z-index: 3;
 }
 
 .banner-img {
   width: 100%;
-  max-width: 520px;
+  max-width: 480px;
   display: block;
   margin: 0 auto;
 }
@@ -37,7 +39,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 16px;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   color: white;
 }
@@ -59,8 +61,8 @@ body {
 /* Side Florals */
 .side-floral {
   position: absolute;
-  top: 140px;
-  width: 130px;
+  top: 260px; /* vertically aligns with calendar */
+  width: 120px;
   opacity: 0.85;
   z-index: 1;
 }
