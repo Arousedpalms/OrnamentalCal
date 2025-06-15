@@ -10,6 +10,10 @@
 <body>
   <div class="calendar-wrapper">
 
+    <!-- Side Florals -->
+    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
+    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
+
     <!-- Top Banner -->
     <div class="top-banner">
       <img src="ornate-calendar-banner.png" alt="Banner" class="banner-img" />
@@ -20,11 +24,7 @@
       </div>
     </div>
 
-    <!-- Side Florals -->
-    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
-    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
-
-    <!-- Calendar Grid -->
+    <!-- Calendar -->
     <div class="calendar" id="calendar"></div>
 
   </div>
@@ -38,7 +38,7 @@
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // Start in June 2025
+    let current = new Date(2025, 5); // June 2025
 
     function renderCalendar(date) {
       const year = date.getFullYear();
