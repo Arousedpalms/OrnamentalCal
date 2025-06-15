@@ -1,91 +1,133 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ornamental Calendar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+/* Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Playfair Display', serif;
+  background-color: #f7f1e5;
+  color: #3b2f2f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
 
-  <div class="calendar-wrapper">
-    <!-- Side Florals -->
-    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
-    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
+.calendar-wrapper {
+  position: relative;
+  width: 600px;
+  padding-top: 180px;
+}
 
-    <!-- Top Banner with Month Title -->
-    <div class="top-banner">
-      <img src="ornate-calendar-banner.png" alt="Calendar Banner" class="banner-img" />
-      <div class="banner-text" id="monthTitle">June 2025</div>
-    </div>
+/* Top Banner */
+.top-banner {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
 
-    <!-- Navigation Buttons -->
-    <div class="navigation">
-      <button id="prevMonth">‹</button>
-      <button id="nextMonth">›</button>
-    </div>
+.banner-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+}
 
-    <!-- Calendar -->
-    <div id="calendar" class="calendar"></div>
-  </div>
+.banner-text {
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  pointer-events: none;
+}
 
-  <script>
-    const events = {
-      "2025-06-14": "🌕 Full Moon",
-      "2025-06-21": "🌸 Midsummer",
-      "2025-06-01": "📌 Start"
-    };
+/* Side Florals */
+.side-floral {
+  position: absolute;
+  top: 180px;
+  width: 120px;
+  height: auto;
+  z-index: -1;
+}
 
-    const calendar = document.getElementById('calendar');
-    const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // June 2025 (Month is 0-indexed)
+.side-floral.left {
+  left: -70px;
+}
 
-    function renderCalendar(date) {
-      const year = date.getFullYear();
-      const month = date.getMonth();
-      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      const firstDay = new Date(year, month, 1).getDay();
-      const totalDays = new Date(year, month + 1, 0).getDate();
+.side-floral.right {
+  right: -70px;
+  transform: scaleX(-1);
+}
 
-      let html = '<table><tr>';
-      daysOfWeek.forEach(day => html += `<th>${day}</th>`);
-      html += '</tr><tr>';
+/* Navigation Buttons */
+.navigation {
+  text-align: center;
+  margin-bottom: 10px;
+}
 
-      for (let i = 0; i < firstDay; i++) {
-        html += '<td></td>';
-      }
+.navigation button {
+  background: #b08b6f;
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 6px 14px;
+  margin: 0 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-      for (let day = 1; day <= totalDays; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const event = events[dateStr];
-        let cellClass = '';
-        let eventHTML = event ? `<div class="event">${event}</div>` : '';
-        html += `<td class="${cellClass}">${day}${eventHTML}</td>`;
+.navigation button:hover {
+  background: #926d54;
+}
 
-        if ((firstDay + day) % 7 === 0) {
-          html += '</tr><tr>';
-        }
-      }
+/* Calendar Styling */
+.calendar {
+  background: #fffdf5;
+  border: 2px solid #b08b6f;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
 
-      html += '</tr></table>';
-      calendar.innerHTML = html;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
 
-      const monthName = date.toLocaleString('default', { month: 'long' });
-      monthTitle.textContent = `${monthName} ${year}`;
-    }
+th {
+  background-color: #e6d3c2;
+  color: #4a3d35;
+  font-weight: bold;
+  padding: 10px 0;
+  border-bottom: 1px solid #d5c1af;
+}
 
-    document.getElementById('prevMonth').onclick = () => {
-      current.setMonth(current.getMonth() - 1);
-      renderCalendar(current);
-    };
+td {
+  padding: 10px 5px;
+  text-align: center;
+  vertical-align: top;
+  border: 1px solid #f0e4d6;
+  height: 60px;
+  position: relative;
+}
 
-    document.getElementById('nextMonth').onclick = () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current);
-    };
+.today {
+  background-color: #d8b899;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}
 
-    renderCalendar(current);
-  </script>
-</body>
-</html>
+/* Event Styles */
+.event {
+  font-size: 12px;
+  margin-top: 4px;
+  color: #7b5e4b;
+  line-height: 1.2;
+}
+
