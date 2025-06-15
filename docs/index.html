@@ -3,50 +3,57 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vintage Calendar</title>
+  <title>Ornamental Calendar</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Month Navigation -->
-  <div class="ribbon">
-    <button id="prevMonth">‹</button>
-    <span id="monthTitle">June 2025</span>
-    <button id="nextMonth">›</button>
+  <div class="calendar-wrapper">
+
+    <!-- Ornamental Top Banner -->
+    <div class="top-banner">
+      <img src="ornate-calendar-banner.png" alt="Banner Frame">
+      <span id="monthTitle" class="month-label">June 2025</span>
+    </div>
+
+    <!-- Side Florals -->
+    <img src="left floral.png" alt="Left Floral" class="side-floral left">
+    <img src="right floral.png" alt="Right Floral" class="side-floral right">
+
+    <!-- Calendar Container -->
+    <div class="calendar" id="calendar"></div>
+
+    <!-- Bottom Floral -->
+    <img src="bottom floral.png" alt="Bottom Floral" class="bottom-floral">
+
   </div>
 
-  <!-- Calendar -->
-  <div class="calendar" id="calendar"></div>
-
   <script>
+    const calendar = document.getElementById('calendar');
+    const monthTitle = document.getElementById('monthTitle');
+
     const events = {
       "2025-06-01": "📌 Start",
       "2025-06-14": "🌕 Full Moon",
       "2025-06-21": "🌸 Midsummer"
     };
 
-    const calendar = document.getElementById('calendar');
-    const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // June = 5
+    let current = new Date(2025, 5); // June 2025 (month is 0-indexed)
 
     function renderCalendar(date) {
       const year = date.getFullYear();
       const month = date.getMonth();
+      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       const firstDay = new Date(year, month, 1);
       const totalDays = new Date(year, month + 1, 0).getDate();
       const today = new Date();
-      const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-      let html = '<table><thead><tr>';
+      let html = '<table><tr>';
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
-      html += '</tr></thead><tbody><tr>';
+      html += '</tr><tr>';
 
-      let weekday = firstDay.getDay();
-      let filledCells = 0;
-
-      for (let i = 0; i < weekday; i++) {
+      for (let i = 0; i < firstDay.getDay(); i++) {
         html += '<td></td>';
-        filledCells++;
       }
 
       for (let day = 1; day <= totalDays; day++) {
@@ -56,41 +63,21 @@
           month === today.getMonth() &&
           year === today.getFullYear();
         const event = events[dateStr];
-        const cellClass = isToday ? 'today' : '';
-        const eventHTML = event ? `<div class="event">${event}</div>` : '';
+        let cellClass = isToday ? 'today' : '';
+        let eventHTML = event ? `<div class="event">${event}</div>` : '';
         html += `<td class="${cellClass}">${day}${eventHTML}</td>`;
-        filledCells++;
-        weekday++;
-
-        if (weekday % 7 === 0 && day !== totalDays) {
+        if ((firstDay.getDay() + day) % 7 === 0) {
           html += '</tr><tr>';
         }
       }
 
-      while (filledCells < 42) {
-        html += '<td></td>';
-        filledCells++;
-        if (filledCells % 7 === 0) html += '</tr><tr>';
-      }
-
-      html += '</tr></tbody></table>';
+      html += '</tr></table>';
       calendar.innerHTML = html;
 
       const monthName = date.toLocaleString('default', { month: 'long' });
       monthTitle.textContent = `${monthName} ${year}`;
     }
 
-    document.getElementById('prevMonth').onclick = () => {
-      current.setMonth(current.getMonth() - 1);
-      renderCalendar(current);
-    };
-
-    document.getElementById('nextMonth').onclick = () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current);
-    };
-
-    // VERY IMPORTANT — this line renders it on load!
     renderCalendar(current);
   </script>
 </body>
