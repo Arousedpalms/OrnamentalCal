@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <!-- Calendar -->
+    <!-- Calendar Container -->
     <div class="calendar" id="calendar"></div>
 
   </div>
@@ -60,4 +60,20 @@
         const isToday = today.getFullYear() === year &&
                         today.getMonth() === month &&
                         today.getDate() === day;
+        const event = events[fullDate];
+        const cellClass = isToday ? 'today' : '';
+        const eventMarkup = event ? `<div class="event">${event}</div>` : '';
+        html += `<td class="${cellClass}">${day}${eventMarkup}</td>`;
+        if ((firstDay + day) % 7 === 0 && day !== daysInMonth) html += '</tr><tr>';
+      }
 
+      html += '</tr></tbody></table>';
+      calendar.innerHTML = html;
+
+      const monthName = date.toLocaleString('default', { month: 'long' });
+      monthTitle.textContent = `${monthName} ${year}`;
+    }
+
+    document.getElementById('prevMonth').onclick = () => {
+      current.setMonth(current.getMonth() - 1);
+      renderCalend
