@@ -10,7 +10,7 @@
 <body>
   <div class="calendar-wrapper">
 
-    <!-- Top Banner -->
+    <!-- Top Banner with Month Navigation -->
     <div class="top-banner">
       <img src="ornate-calendar-banner.png" alt="Top Banner" class="banner-img">
       <div class="banner-text">
@@ -20,12 +20,13 @@
       </div>
     </div>
 
-    <!-- Side Florals -->
+    <!-- Left and Right Side Florals -->
     <img src="left-floral.png" alt="Left Floral" class="side-floral left">
     <img src="right-floral.png" alt="Right Floral" class="side-floral right">
 
-    <!-- Calendar -->
+    <!-- Calendar Grid -->
     <div class="calendar" id="calendar"></div>
+
   </div>
 
   <script>
@@ -37,13 +38,15 @@
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // June 2025
+    let current = new Date(2025, 5); // Start at June 2025
 
     function renderCalendar(date) {
       const year = date.getFullYear();
       const month = date.getMonth();
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      const today = new Date();
       const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
       let html = '<table><tr>';
@@ -51,8 +54,6 @@
       html += '</tr><tr>';
 
       for (let i = 0; i < firstDay; i++) html += '<td></td>';
-
-      const today = new Date();
 
       for (let day = 1; day <= daysInMonth; day++) {
         const fullDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
