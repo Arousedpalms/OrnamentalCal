@@ -1,4 +1,4 @@
-/* Base Styles */
+/* Base Layout */
 body {
   margin: 0;
   padding: 40px 20px;
@@ -13,27 +13,27 @@ body {
 .calendar-wrapper {
   position: relative;
   text-align: center;
+  padding-top: 200px; /* makes room for top banner overlap */
 }
 
 /* Top Banner */
 .top-banner {
-  position: relative;
-  width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  margin-bottom: -30px; /* pull closer to calendar */
-  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  z-index: 10;
 }
 
 .banner-img {
   width: 100%;
   height: auto;
-  display: block;
 }
 
 .banner-text {
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -55,32 +55,33 @@ body {
 /* Side Florals */
 .side-floral {
   position: absolute;
-  top: 80px;
-  height: 380px;
-  z-index: 0;
-}
-
-.side-floral.left {
-  left: -80px;
-}
-
-.side-floral.right {
-  right: -80px;
-}
-
-/* Calendar Grid */
-.calendar {
-  background-color: #fff9ef;
-  border: 1px solid #bfa487;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 700px;
-  margin: 0 auto;
-  position: relative;
+  top: 220px;
+  height: 400px;
   z-index: 1;
 }
 
+.side-floral.left {
+  left: -90px;
+}
+
+.side-floral.right {
+  right: -90px;
+}
+
+/* Calendar */
+.calendar {
+  background-color: #fff9ef;
+  border: 1px solid #bfa487;
+  border-radius: 12px;
+  padding: 30px;
+  width: 700px;
+  margin: 0 auto;
+  z-index: 2;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar Table */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -88,7 +89,7 @@ table {
 }
 
 th {
-  padding: 14px 0;
+  padding: 16px 0;
   font-size: 18px;
   background-color: #f0dfc9;
   color: #5d4433;
@@ -96,15 +97,15 @@ th {
 }
 
 td {
-  padding: 16px 0;
-  font-size: 18px;
-  height: 60px;
+  padding: 20px 0;
+  font-size: 20px;
+  height: 70px;
   vertical-align: top;
   border: 1px solid #e2d3c1;
   position: relative;
 }
 
-/* Highlight Today */
+/* Today's Date */
 .today {
   background-color: #c8a88e;
   color: white;
@@ -120,6 +121,6 @@ td {
 .event {
   font-size: 12px;
   color: #8b6e5e;
-  margin-top: 4px;
+  margin-top: 6px;
   line-height: 1.2;
 }
