@@ -10,13 +10,9 @@
 <body>
   <div class="calendar-wrapper">
 
-    <!-- Side Florals -->
-    <img src="left-floral.png" alt="Left Floral" class="side-floral left" />
-    <img src="right-floral.png" alt="Right Floral" class="side-floral right" />
-
     <!-- Top Banner -->
     <div class="top-banner">
-      <img src="ornate-calendar-banner.png" alt="Banner" class="banner-img" />
+      <img src="ornate-calendar-banner.png" alt="Banner" class="banner-img">
       <div class="banner-text">
         <button id="prevMonth" class="nav-btn">‹</button>
         <span id="monthTitle">June 2025</span>
@@ -24,7 +20,11 @@
       </div>
     </div>
 
-    <!-- Calendar Container -->
+    <!-- Side Florals -->
+    <img src="left-floral.png" alt="Left Floral" class="side-floral left">
+    <img src="right-floral.png" alt="Right Floral" class="side-floral right">
+
+    <!-- Calendar -->
     <div class="calendar" id="calendar"></div>
 
   </div>
@@ -38,7 +38,7 @@
 
     const calendar = document.getElementById('calendar');
     const monthTitle = document.getElementById('monthTitle');
-    let current = new Date(2025, 5); // Start on June 2025
+    let current = new Date(2025, 5); // June 2025
 
     function renderCalendar(date) {
       const year = date.getFullYear();
@@ -47,9 +47,9 @@
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
       const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-      let html = '<table><thead><tr>';
+      let html = '<table><tr>';
       daysOfWeek.forEach(day => html += `<th>${day}</th>`);
-      html += '</tr></thead><tbody><tr>';
+      html += '</tr><tr>';
 
       for (let i = 0; i < firstDay; i++) html += '<td></td>';
 
@@ -62,30 +62,5 @@
                         today.getDate() === day;
         const event = events[fullDate];
         const cellClass = isToday ? 'today' : '';
-        const eventMarkup = event ? `<div class="event">${event}</div>` : '';
-        html += `<td class="${cellClass}">${day}${eventMarkup}</td>`;
-        if ((firstDay + day) % 7 === 0 && day !== daysInMonth) html += '</tr><tr>';
-      }
-
-      html += '</tr></tbody></table>';
-      calendar.innerHTML = html;
-
-      const monthName = date.toLocaleString('default', { month: 'long' });
-      monthTitle.textContent = `${monthName} ${year}`;
-    }
-
-    document.getElementById('prevMonth').onclick = () => {
-      current.setMonth(current.getMonth() - 1);
-      renderCalendar(current);
-    };
-
-    document.getElementById('nextMonth').onclick = () => {
-      current.setMonth(current.getMonth() + 1);
-      renderCalendar(current);
-    };
-
-    renderCalendar(current);
-  </script>
-</body>
-</html>
+        const eventMarkup = event ?
 
